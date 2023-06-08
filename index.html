@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div>
+    <div class="container">
+        <div id="left">
+             <div class="list" draggable="true">Item 1</div>
+             <div class="list" draggable="true">Item 2</div>
+             <div class="list" draggable="true">Item 3</div>
+             <div class="list" draggable="true">Item 4</div>
+        </div>
+        <div id="right"></div>
+    </div>
+    <button class="button-24" onclick="resetHandler()">reset</button>
+</div>
+    <script>
+        var lists = document.getElementsByClassName("list");
+        var rightBox=document.getElementById("right");
+        var leftBox=document.getElementById("left");
+
+        resetHandler=()=>{
+            lists = document.getElementsByClassName("list");
+            for(list of lists){
+                leftBox.appendChild(list);
+            }
+            rightBox=document.getElementById("right");
+        }
+         //console.log(typeof(rightBox));
+        for(list of lists){
+        list.addEventListener("dragstart",function(e){
+        let selected=e.target;
+        rightBox.addEventListener("dragover",function(e){
+          e.preventDefault();
+        });
+
+        rightBox.addEventListener("drop",function(e){
+         rightBox.appendChild(selected);
+         selected=null;
+         window.alert("item dropped")
+        })
+        leftBox.addEventListener("dragover",function(e){
+          e.preventDefault();
+        });
+
+        leftBox.addEventListener("drop",function(e){
+         leftBox.appendChild(selected);
+         selected=null;
+         window.alert("item dropped")
+        })
+        })
+        }
+    </script>
+</body>
+</html>
